@@ -280,6 +280,28 @@ h1 {
   animation: pop 0.3s ease both;
 }
 .reveal[hidden] { display: none; }
+
+.ransom {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(340px, calc(100% - 40px));
+  padding: 26px 22px 22px;
+  border-radius: 20px;
+  background: rgba(20, 20, 28, 0.98);
+  border: 1px solid rgba(255, 196, 0, 0.35);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  z-index: 3;
+  animation: pop 0.4s cubic-bezier(.2, .9, .3, 1.2) both;
+}
+.ransom[hidden] { display: none; }
+.ransom-kicker { margin: 0 0 6px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #ffc400; }
+.ransom h2 { margin: 0 0 10px; font-size: 18px; font-weight: 600; }
+.ransom-demand { margin: 0 0 6px; font-size: 20px; font-weight: 700; }
+.ransom-note { margin: 0 0 4px; font-size: 12px; opacity: 0.6; }
+.ransom-jk { margin: 14px 0 16px; font-size: 16px; font-weight: 600; color: #ffc400; }
+.ransom .btn-primary { width: 100%; }
 .reveal p { margin: 0 0 16px; font-size: 16px; }
 
 @media (prefers-reduced-motion: reduce) {

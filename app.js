@@ -14,6 +14,46 @@
   var fakeWait = document.getElementById("fake-wait");
   var fakeClose = document.getElementById("fake-close");
   var dlgBody = document.getElementById("dlg-body");
+  var dialogEl = document.querySelector("#freeze .dialog");
+  var ransomEl = document.getElementById("ransom");
+  var ransomDemand = document.getElementById("ransom-demand");
+  var ransomFill = document.getElementById("ransom-fill");
+  var ransomPct = document.getElementById("ransom-pct");
+  var ransomJk = document.getElementById("ransom-jk");
+  var ransomExit = document.getElementById("ransom-exit");
+  var ransomTimer = null;
+
+  // Silly food-only demands. No money, no amounts of currency, no payment.
+  var RANSOMS = [
+    "2 wraps of jollof rice",
+    "3 puff-puffs",
+    "1 indivisible gala",
+    "a plate of moi moi, no pepper",
+    "1 bottle of chilled zobo"
+  ];
+
+  function showRansom() {
+    if (!active) return;
+    dialogEl.hidden = true;
+    ransomEl.hidden = false;
+    ransomDemand.textContent = RANSOMS[Math.floor(Math.random() * RANSOMS.length)];
+    var pct = 0;
+    ransomFill.style.width = "0%";
+    ransomPct.textContent = "0";
+    ransomJk.hidden = true;
+    ransomExit.hidden = true;
+    clearInterval(ransomTimer);
+    ransomTimer = setInterval(function () {
+      pct = Math.min(100, pct + 4 + Math.random() * 6);
+      ransomFill.style.width = pct.toFixed(1) + "%";
+      ransomPct.textContent = Math.floor(pct);
+      if (pct >= 100) {
+        clearInterval(ransomTimer);
+        ransomJk.hidden = false;
+        ransomExit.hidden = false;
+      }
+    }, 500);
+  }
 
   var timers = [];
   var progressTimer = null;
@@ -60,6 +100,9 @@
     // Clock-style flavour text that gently admits it is a prank.
     later(function () { dlgBody.textContent = "still busy. this is a simulator, so it's fine."; }, 4000);
 
+    // Joke ransom screen after a few seconds (food only, always ends in "JK").
+    later(function () { showRansom(); }, 7000);
+
     // X button appears after 3 seconds.
     later(function () { exitX.classList.add("show"); }, 3000);
 
@@ -68,6 +111,9 @@
   }
 
   function showReveal() {
+    clearInterval(ransomTimer);
+    ransomEl.hidden = true;
+    dialogEl.hidden = false;
     reveal.hidden = false;
     revealExit.focus();
   }
@@ -78,6 +124,9 @@
     timers.forEach(clearTimeout);
     timers = [];
     clearInterval(progressTimer);
+    clearInterval(ransomTimer);
+    ransomEl.hidden = true;
+    dialogEl.hidden = false;
     tapCount = 0;
     clearTimeout(tapTimer);
     freeze.classList.remove("on");
@@ -112,6 +161,7 @@
   fakeClose.addEventListener("click", function () { showReveal(); });
 
   exitX.addEventListener("click", exitPrank);
+  ransomExit.addEventListener("click", exitPrank);
   revealExit.addEventListener("click", exitPrank);
   startBtn.addEventListener("click", startPrank);
 

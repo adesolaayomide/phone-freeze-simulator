@@ -62,6 +62,18 @@
       </div>
     </div>
 
+    <!-- joke ransom screen: food, no money, no payment fields -->
+    <div id="ransom" class="ransom" hidden>
+      <p class="ransom-kicker">device locked</p>
+      <h2>to unlock your phone, bring</h2>
+      <p class="ransom-demand" id="ransom-demand">2 wraps of jollof rice</p>
+      <p class="ransom-note">(this is not a real request. nobody is getting jollof.)</p>
+      <div class="bar"><span id="ransom-fill"></span></div>
+      <p class="pct"><span id="ransom-pct">0</span>%</p>
+      <p id="ransom-jk" class="ransom-jk" hidden>JK. this is a prank, tap to exit</p>
+      <button type="button" id="ransom-exit" class="btn-primary" hidden>exit prank</button>
+    </div>
+
     <!-- honest prank indicator, always visible -->
     <div id="prank-badge" class="prank-badge">
       <span class="dot"></span> prank mode · tap 3x or press esc to exit
