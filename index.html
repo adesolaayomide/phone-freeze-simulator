@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Freeze Sim: a phone freeze prank simulator</title>
+  <meta name="description" content="A harmless phone-freeze prank SIMULATOR. Nothing is locked. Exit any time." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- LANDING -->
+  <main id="landing" class="landing">
+    <div class="glow"></div>
+    <section class="card">
+      <p class="tag">prank simulator · web only</p>
+      <h1>freeze sim</h1>
+      <p class="lede">
+        a fake "your phone is frozen" screen for a laugh. it only lives inside this browser tab.
+      </p>
+
+      <div class="disclaimer" role="note">
+        <strong>this is a prank simulator.</strong>
+        it does not lock, freeze, or control your device. it does not stop you leaving this page,
+        it does not block back, refresh, or close, and it asks for no money or personal info.
+        only use it on yourself or with someone who is in on the joke.
+      </div>
+
+      <details class="exit-note">
+        <summary>how to exit</summary>
+        <ul>
+          <li>press <kbd>ESC</kbd></li>
+          <li>tap the <b>X</b> in the corner (it appears after 3 seconds)</li>
+          <li>tap the screen <b>3 times fast</b> anywhere</li>
+          <li>or just close or switch the tab, it always works</li>
+        </ul>
+      </details>
+
+      <button id="start" class="btn-primary">start prank</button>
+      <p class="fineprint">no tracking. no sound. no permissions requested.</p>
+    </section>
+  </main>
+
+  <!-- FAKE FREEZE OVERLAY -->
+  <div id="freeze" class="freeze" aria-hidden="true">
+    <div class="fake-status">
+      <span id="clock">12:00</span>
+      <span class="fake-icons">5g ▮▮▮ 84%</span>
+    </div>
+
+    <div class="scrim"></div>
+
+    <div class="dialog" role="alertdialog" aria-labelledby="dlg-title" aria-describedby="dlg-body">
+      <div class="spinner" aria-hidden="true"></div>
+      <h2 id="dlg-title">app isn't responding</h2>
+      <p id="dlg-body">the screen is busy. you can wait for it to finish or close the app.</p>
+      <div class="bar"><span id="bar-fill"></span></div>
+      <p class="pct"><span id="pct">0</span>%</p>
+      <div class="dlg-actions">
+        <button type="button" class="ghost" id="fake-wait">wait</button>
+        <button type="button" class="ghost" id="fake-close">close app</button>
+      </div>
+    </div>
+
+    <!-- honest prank indicator, always visible -->
+    <div id="prank-badge" class="prank-badge">
+      <span class="dot"></span> prank mode · tap 3x or press esc to exit
+    </div>
+
+    <button id="exit-x" class="exit-x" aria-label="exit prank">✕</button>
+
+    <div id="reveal" class="reveal" hidden>
+      <p>it's a prank. nothing was frozen.</p>
+      <button type="button" id="reveal-exit" class="btn-primary">exit prank</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
